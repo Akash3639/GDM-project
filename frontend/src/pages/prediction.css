@@ -1,0 +1,547 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, sans-serif;
+  background:
+    radial-gradient(circle at top left, #dbeafe, #f0f9ff),
+    linear-gradient(135deg, #eef2ff, #fdf4ff);
+  min-height: 100vh;
+}
+
+/* PAGE */
+
+.prediction-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+}
+
+/* CARD */
+
+.prediction-card {
+  width: 100%;
+  max-width: 1250px;
+
+  background: rgba(255, 255, 255, 0.75);
+
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255,255,255,0.4);
+
+  border-radius: 34px;
+
+  padding: 50px;
+
+  box-shadow:
+    0 20px 50px rgba(99,102,241,0.12),
+    0 10px 25px rgba(0,0,0,0.06);
+
+  animation: fadeIn 0.8s ease;
+}
+
+/* TITLE */
+
+.prediction-card h1 {
+  font-size: 46px;
+  font-weight: 800;
+
+  background: linear-gradient(
+    135deg,
+    #4f46e5,
+    #7c3aed,
+    #ec4899
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  margin-bottom: 14px;
+}
+
+.prediction-card p {
+  font-size: 18px;
+  color: #64748b;
+  margin-bottom: 45px;
+  line-height: 1.7;
+}
+
+/* GRID */
+
+.grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(260px, 1fr));
+
+  gap: 28px;
+}
+
+/* INPUT GROUP */
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* LABEL */
+
+.input-group label {
+  font-size: 15px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+
+  margin-bottom: 6px;
+
+  color: #1e293b;
+}
+
+/* FIELD INFO */
+
+.field-info {
+  font-size: 13px;
+
+  color: #64748b;
+
+  margin-bottom: 12px;
+
+  line-height: 1.5;
+}
+
+/* INPUT */
+
+.input-group input {
+  padding: 18px 20px;
+
+  border-radius: 18px;
+
+  border: 2px solid transparent;
+
+  background: rgba(255,255,255,0.95);
+
+  font-size: 15px;
+
+  color: #1e293b;
+
+  transition: all 0.3s ease;
+
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.05);
+}
+
+/* INPUT FOCUS */
+
+.input-group input:focus {
+  outline: none;
+
+  border-color: #7c3aed;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 24px rgba(124,58,237,0.18);
+}
+
+/* BUTTON */
+
+button {
+  margin-top: 40px;
+
+  width: 100%;
+
+  padding: 20px;
+
+  border: none;
+
+  border-radius: 20px;
+
+  background: linear-gradient(
+    135deg,
+    #4f46e5,
+    #7c3aed,
+    #ec4899
+  );
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.5px;
+
+  cursor: pointer;
+
+  transition: all 0.35s ease;
+
+  box-shadow:
+    0 10px 25px rgba(124,58,237,0.28);
+}
+
+/* BUTTON HOVER */
+
+button:hover {
+  transform: translateY(-3px) scale(1.01);
+
+  box-shadow:
+    0 16px 35px rgba(124,58,237,0.35);
+}
+
+/* RESULT */
+
+.result-box {
+  margin-top: 40px;
+
+  padding: 35px;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.9),
+      rgba(248,250,252,0.95)
+    );
+
+  border: 1px solid rgba(255,255,255,0.5);
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.06);
+
+  animation: fadeIn 0.6s ease;
+}
+
+.result-box h2 {
+  font-size: 30px;
+
+  margin-bottom: 18px;
+}
+
+.result-box p {
+  font-size: 20px;
+
+  color: #334155;
+}
+
+.result-box strong {
+  color: #7c3aed;
+  margin-left: 10px;
+}
+
+/* ANIMATION */
+
+@keyframes fadeIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+  .prediction-card {
+    padding: 30px 22px;
+  }
+
+  .prediction-card h1 {
+    font-size: 32px;
+  }
+
+  .prediction-card p {
+    font-size: 15px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+/* ===================================================== */
+/* RESULT CONTAINER */
+/* ===================================================== */
+
+.result-container {
+
+  margin-top: 45px;
+
+  padding: 35px;
+
+  border-radius: 30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.95),
+      rgba(248,250,252,0.98)
+    );
+
+  border: 1px solid rgba(255,255,255,0.5);
+
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.06);
+
+  animation: fadeIn 0.6s ease;
+}
+
+/* RESULT TOP */
+
+.result-top {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+  margin-bottom: 30px;
+}
+
+/* ICON */
+
+.risk-icon {
+
+  width: 80px;
+
+  height: 80px;
+
+  border-radius: 24px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 36px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f59e0b,
+      #ef4444
+    );
+
+  color: white;
+
+  box-shadow:
+    0 10px 24px rgba(239,68,68,0.25);
+}
+
+/* TITLE */
+
+.result-top h2 {
+
+  font-size: 34px;
+
+  margin-bottom: 8px;
+
+  color: #0f172a;
+}
+
+.risk-subtitle {
+
+  color: #64748b;
+
+  font-size: 15px;
+}
+
+/* ===================================================== */
+/* PROBABILITY */
+/* ===================================================== */
+
+.probability-section {
+
+  margin-bottom: 35px;
+}
+
+.probability-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-bottom: 12px;
+
+  font-weight: 700;
+
+  color: #1e293b;
+}
+
+.progress-bar {
+
+  height: 18px;
+
+  border-radius: 999px;
+
+  background: #e2e8f0;
+
+  overflow: hidden;
+}
+
+.progress-fill {
+
+  height: 100%;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4f46e5,
+      #7c3aed,
+      #ec4899
+    );
+
+  animation: progressAnimation 1s ease;
+}
+
+/* ===================================================== */
+/* ACCURACY CARD */
+/* ===================================================== */
+
+.accuracy-card {
+
+  padding: 28px;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eef2ff,
+      #f5f3ff
+    );
+
+  margin-bottom: 30px;
+}
+
+.accuracy-card h3 {
+
+  margin-bottom: 10px;
+
+  color: #4338ca;
+}
+
+.accuracy-card p {
+
+  font-size: 42px;
+
+  font-weight: 800;
+
+  color: #7c3aed;
+
+  margin-bottom: 10px;
+}
+
+.accuracy-card span {
+
+  color: #64748b;
+
+  line-height: 1.6;
+}
+
+/* ===================================================== */
+/* GUIDANCE */
+/* ===================================================== */
+
+.guidance-box {
+
+  padding: 28px;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff7ed,
+      #fef2f2
+    );
+
+  border-left: 6px solid #f97316;
+
+  margin-bottom: 30px;
+}
+
+.guidance-box h3 {
+
+  margin-bottom: 14px;
+
+  color: #ea580c;
+}
+
+.guidance-box p {
+
+  color: #444;
+
+  line-height: 1.8;
+}
+
+/* ===================================================== */
+/* RISK FACTORS */
+/* ===================================================== */
+
+.risk-factors h3 {
+
+  margin-bottom: 18px;
+
+  color: #1e293b;
+}
+
+.risk-tags {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+}
+
+.risk-tags span {
+
+  padding: 12px 18px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4f46e5,
+      #7c3aed
+    );
+
+  color: white;
+
+  font-weight: 600;
+
+  font-size: 14px;
+
+  box-shadow:
+    0 8px 18px rgba(124,58,237,0.2);
+}
+
+/* ===================================================== */
+/* ANIMATION */
+/* ===================================================== */
+
+@keyframes progressAnimation {
+
+  from {
+    width: 0%;
+  }
+}

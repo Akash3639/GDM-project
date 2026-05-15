@@ -1,40 +1,101 @@
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
+
+import "./AppLayout.css";
 
 const links = [
+
   { to: "/", label: "Dashboard" },
+
   { to: "/education", label: "Pregnancy Info" },
+
   { to: "/chatbot", label: "AI Chatbot" },
+
   { to: "/prediction", label: "GDM Prediction" },
+
   { to: "/tracker", label: "Health Tracker" },
+
   { to: "/lifestyle", label: "Diet & Exercise" },
+
   { to: "/hospitals", label: "Hospitals" },
-  { to: "/extras", label: "Extra Care" },
+
 ];
 
 function AppLayout() {
+
+
   const navigate = useNavigate();
+
   const logout = () => {
+
     localStorage.removeItem("token");
+
     navigate("/auth");
   };
 
   return (
-    <div className="app-frame">
-      <aside className="sidebar">
-        <h2>AI Pregnancy Care</h2>
-        <p className="muted">Early pregnancy to safe delivery support</p>
-        <nav>
+
+    <div className="app-layout">
+
+      {/* GLOBAL NAVBAR */}
+
+      <header className="global-navbar">
+
+        {/* LOGO */}
+
+        <div className="navbar-logo">
+
+          <h1>AI Pregnancy Care</h1>
+
+          <p>
+            Smart maternal healthcare support
+          </p>
+
+        </div>
+
+        {/* NAVIGATION */}
+
+        <nav className="global-nav-links">
+
           {links.map((link) => (
-            <NavLink key={link.to} to={link.to} end={link.to === "/"} className="side-link">
+
+            <NavLink
+              key={link.to}
+              to={link.to}
+              className={({ isActive }) =>
+                isActive ? "active-link" : ""
+              }
+            >
+
               {link.label}
+
             </NavLink>
+
           ))}
+
         </nav>
-        <button className="btn-ghost" onClick={logout}>Logout</button>
-      </aside>
-      <main className="page-wrap">
+
+
+        {/* LOGOUT */}
+
+        <button
+          className="logout-btn"
+          onClick={logout}
+        >
+
+          Logout
+
+        </button>
+
+      </header>
+
+      {/* PAGE CONTENT */}
+
+      <main className="global-page-content">
+
         <Outlet />
+
       </main>
+
     </div>
   );
 }

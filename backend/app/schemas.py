@@ -67,12 +67,18 @@ class ReminderCreate(BaseModel):
 
 
 class GDMPredictionInput(BaseModel):
+
     age: float
+    no_of_pregnancy: float
+    gestation_in_previous_pregnancy: float
     bmi: float
-    glucose_level: float
-    blood_pressure: float
-    insulin: float
-    family_history: int
+    hdl: float
+    family_history: float
+    pcos: float
+    sys_bp: float
+    dia_bp: float
+    ogtt: float
+    hemoglobin: float
 
 
 class ChatRequest(BaseModel):

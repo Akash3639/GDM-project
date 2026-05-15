@@ -1,21 +1,40 @@
 from datetime import date, datetime
 from io import BytesIO
 from pathlib import Path
-from app.services.chatbot import router as chatbot_router
+
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
+
+
 from dotenv import load_dotenv
+
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
+
 from sqlalchemy.orm import Session
 
-from .auth import create_access_token, get_current_user, hash_password, verify_password
-from .database import Base, engine, get_db
-from .ml_model import predict_gdm
-from .models import HealthLog, MoodLog, Reminder, User
-from .schemas import (
-    ChatRequest,
+from app.services.chatbot import router as chatbot_router
+
+from app.auth import (
+    create_access_token,
+    get_current_user,
+    hash_password,
+    verify_password,
+)
+
+from app.database import Base, engine, get_db
+
+from app.ml_model import predict_gdm
+
+from app.models import (
+    HealthLog,
+    MoodLog,
+    Reminder,
+    User,
+)
+
+from app.schemas import (
     ForgotPasswordRequest,
     GDMPredictionInput,
     HealthLogCreate,
@@ -27,9 +46,8 @@ from .schemas import (
     UserLogin,
     UserProfile,
 )
-from .services.chatbot import generate_reply
-from .services.recommendation import build_recommendations
 
+from app.services.recommendation import build_recommendations
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
 
@@ -104,36 +122,17 @@ def dashboard(current_user: User = Depends(get_current_user)):
     ]
     return {"pregnancy_week": weeks, "daily_tips": tips}
 
-
-@app.post("/chatbot")
-def chatbot(payload: ChatRequest, current_user: User = Depends(get_current_user)):
-   reply = generate_reply(payload.message, payload.language or "en", payload.history)
-   return {"response": reply}
-
-
-@app.post("/chatbot/public")
-def chatbot_public(payload: ChatRequest):
-    reply = generate_reply(payload.message, payload.language or "en", payload.history)
-    return {"response": reply}
-
 @app.post("/predict-gdm")
 def predict_gdm_endpoint(payload: GDMPredictionInput, current_user: User = Depends(get_current_user)):
-    pred, prob = predict_gdm(
-        [
-            payload.age,
-            payload.bmi,
-            payload.glucose_level,
-            payload.blood_pressure,
-            payload.insulin,
-            payload.family_history,
-        ]
-    )
+    result = predict_gdm(payload)
+    pred = result["prediction"]
+    prob = result["risk_probability"]
     level = "High Risk" if pred == 1 else "Low Risk"
     explanation = (
-        f"Prediction confidence for GDM risk: {prob * 100:.1f}%. "
+        f"Prediction confidence for GDM risk: {prob:.1f}%. "
         "This is a screening aid, not a medical diagnosis."
     )
-    return {"risk": level, "probability": prob, "explanation": explanation}
+    return {"risk": level, "probability": prob / 100, "explanation": explanation}
 
 
 @app.post("/health/log")
@@ -213,3 +212,28 @@ def generate_report_pdf(db: Session = Depends(get_db), current_user: User = Depe
     pdf.save()
     buffer.seek(0)
     return StreamingResponse(buffer, media_type="application/pdf", headers={"Content-Disposition": "attachment; filename=health_report.pdf"})
+
+
+
+
+
+# =====================================================
+# GDM PREDICTION API
+# =====================================================
+
+@app.post("/predict")
+def predict(data: GDMPredictionInput):
+
+    try:
+
+        result = predict_gdm(data)
+
+        return result
+
+    except Exception as e:
+
+        print("Prediction Error:", str(e))
+
+        return {
+            "error": str(e)
+        }

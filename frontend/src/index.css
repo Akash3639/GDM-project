@@ -1,0 +1,193 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+
+  width: 100%;
+
+  overflow-x: hidden;
+}
+
+img {
+
+  max-width: 100%;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 768px) {
+
+  .dashboard-grid,
+  .summary-grid,
+  .content-grid {
+
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-card {
+
+    flex-direction: column;
+  }
+
+  .hero-left img {
+
+    width: 100%;
+  }
+
+  .sidebar {
+
+    width: 100%;
+
+    height: auto;
+
+    position: relative;
+  }
+
+  .hero-right h1 {
+
+    font-size: 36px;
+  }
+
+  .prediction-card,
+  .dashboard-card {
+
+    padding: 20px;
+  }
+}
+
+
+/* ================================================= */
+/* DARK MODE */
+/* ================================================= */
+
+body.dark-mode {
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a,
+      #111827
+    );
+
+  color: white;
+}
+
+body.dark-mode .global-navbar,
+body.dark-mode .hero-card,
+body.dark-mode .dashboard-card,
+body.dark-mode .summary-card {
+
+  background:
+    rgba(15,23,42,0.88);
+
+  color: white;
+}
+
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode li {
+
+  color: #cbd5e1;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+
+  color: white;
+}
+
+
+
+
+/* ================================================= */
+/* GLOBAL DARK MODE */
+/* ================================================= */
+
+body.dark-mode {
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a,
+      #111827
+    );
+
+  color: white;
+}
+
+/* MAIN CONTAINERS */
+
+body.dark-mode .global-navbar,
+body.dark-mode .hero-card,
+body.dark-mode .dashboard-card,
+body.dark-mode .summary-card,
+body.dark-mode .card,
+body.dark-mode .card-soft,
+body.dark-mode .prediction-card,
+body.dark-mode .chatbot-container,
+body.dark-mode .tracker-card {
+
+  background:
+    rgba(15,23,42,0.88) !important;
+
+  color: white !important;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+}
+
+/* TEXT */
+
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode li,
+body.dark-mode label {
+
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4 {
+
+  color: white !important;
+}
+
+/* INPUTS */
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+
+  background:
+    rgba(30,41,59,0.9);
+
+  color: white;
+
+  border:
+    1px solid rgba(255,255,255,0.1);
+}
+
+/* NAV LINKS */
+
+body.dark-mode .global-nav-links a {
+
+  color: #e2e8f0;
+}
+
+/* PAGE BACKGROUND */
+
+body.dark-mode .app-layout {
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a,
+      #111827
+    );
+}
